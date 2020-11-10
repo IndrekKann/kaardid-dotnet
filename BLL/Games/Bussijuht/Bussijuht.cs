@@ -37,10 +37,11 @@ namespace BLL.Games.Bussijuht
                 players.Add(new Player($"Player {i + 1}"));
             }
 
-            foreach (var card in deck)
+            for (var i = 0; i < deck.Count; i++)
             {
-                
+                players[i % players.Count].Hand.Add(deck[i]);
             }
+            
         }
 
     }

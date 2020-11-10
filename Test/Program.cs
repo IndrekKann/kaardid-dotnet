@@ -11,15 +11,29 @@ namespace Test
         {
             List<Card> deck = Card.GetDeck();
             Bussijuht game = new Bussijuht(deck);
+            
             game.InitializeBoard();
+            game.InitializeHands(4);
             
             foreach (var card in game.board)
             {
-                Console.WriteLine(card);
+                Console.Write(card + ", ");
+            }
+
+            Console.WriteLine();
+
+            foreach (var player in game.players)
+            {
+                Console.WriteLine(player.Name);
+                
+                foreach (var card in player.Hand)
+                {
+                    Console.Write(card + ", ");
+                }
+                
+                Console.WriteLine();
             }
             
-            Console.WriteLine(game.board.Count);
-            Console.WriteLine(game.deck.Count);
         }
     }
 }
