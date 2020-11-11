@@ -13,7 +13,9 @@ namespace DAL.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Image = table.Column<string>(nullable: false)
+                    Image = table.Column<string>(nullable: false),
+                    MinPlayers = table.Column<int>(nullable: false),
+                    MaxPlayers = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
