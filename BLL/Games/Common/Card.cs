@@ -7,7 +7,8 @@ namespace BLL.Games.Common
 {
     public class Card
     {
-        public enum Value
+        
+        public enum ValueEnum
         {
             Ace = 1,
             Two,
@@ -24,7 +25,7 @@ namespace BLL.Games.Common
             King
         }
 
-        public enum Suit
+        public enum SuitEnum
         {
             Club, Diamond, Heart, Spade
         }
@@ -33,22 +34,23 @@ namespace BLL.Games.Common
             return Enum.GetValues(typeof(T)).Cast<T>();
         }
 
-        public Value value;
-        public Suit suit;
+        public Guid? Id { get; set; }
+        public string Value;
+        public string Suit;
 
-        public Card(Value value, Suit suit)
+        public Card(ValueEnum value, SuitEnum suit)
         {
-            this.value = value;
-            this.suit = suit;
+            Value = value.ToString();
+            Suit = suit.ToString();
         }
 
         public static List<Card> GetDeck()
         {
             var deck = new List<Card>();
 
-            foreach (var cardSuit in GetValues<Suit>())
+            foreach (var cardSuit in GetValues<SuitEnum>())
             {
-                foreach (var cardValue in GetValues<Value>())
+                foreach (var cardValue in GetValues<ValueEnum>())
                 {
                     deck.Add(new Card(cardValue, cardSuit));
                 }
@@ -75,7 +77,7 @@ namespace BLL.Games.Common
 
         public override string ToString()
         {
-            return $"{value} of {suit}s";
+            return $"{Value} of {Suit}s";
         }
     }
 }

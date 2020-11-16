@@ -1,45 +1,49 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
 using BLL.Games.Common;
 
 namespace BLL.Games.Bussijuht
 {
     public class Bussijuht
     {
-        public List<Card> deck;
-        public List<Player> players = new List<Player>();
-        public List<Card> board = new List<Card>();
+        public List<Card> Deck = Card.GetDeck();
+        public List<Player> Players = new List<Player>();
+        public List<Card> Board = new List<Card>();
 
-        public Bussijuht(List<Card> deck)
+        public Bussijuht()
         {
-            this.deck = deck;
         }
 
-        public void InitializeBoard()
+        public void InitializeGame(int amountOfPlayers)
         {
-            var deckQueue = new Queue<Card>(deck);
-            var boardQueue = new Queue<Card>(board);
+            InitializeBoard();
+            InitializeHands(amountOfPlayers);
+        }
+
+        private void InitializeBoard()
+        {
+            var deckQueue = new Queue<Card>(Deck);
+            var boardQueue = new Queue<Card>(Board);
             
             for (var i = 0; i < 15 ; i++)
             {
                 boardQueue.Enqueue(deckQueue.Dequeue());
             }
 
-            deck = deckQueue.ToList();
-            board = boardQueue.ToList();
+            Deck = deckQueue.ToList();
+            Board = boardQueue.ToList();
         }
 
-        public void InitializeHands(int amountOfPlayers)
+        private void InitializeHands(int amountOfPlayers)
         {
             for (var i = 0; i < amountOfPlayers; i++)
             {
-                players.Add(new Player($"Player {i + 1}"));
+                Players.Add(new Player($"Player {i + 1}"));
             }
 
-            for (var i = 0; i < deck.Count; i++)
+            for (var i = 0; i < Deck.Count; i++)
             {
-                players[i % players.Count].Hand.Add(deck[i]);
+                Players[i % Players.Count].Hand.Add(Deck[i]);
             }
             
         }

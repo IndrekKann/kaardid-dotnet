@@ -9,20 +9,18 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            List<Card> deck = Card.GetDeck();
-            Bussijuht game = new Bussijuht(deck);
+            var game = new Bussijuht();
             
-            game.InitializeBoard();
-            game.InitializeHands(4);
+            game.InitializeGame(4);
             
-            foreach (var card in game.board)
+            foreach (var card in game.Board)
             {
                 Console.Write(card + ", ");
             }
 
             Console.WriteLine();
 
-            foreach (var player in game.players)
+            foreach (var player in game.Players)
             {
                 Console.WriteLine(player.Name);
                 
